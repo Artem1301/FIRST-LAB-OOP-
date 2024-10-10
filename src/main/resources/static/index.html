@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Кредитні Пропозиції</title>
+</head>
+<body>
+<header>
+    <h1>Порівняння Цільових Кредитів</h1>
+    <p>Знайдіть найкращу кредитну пропозицію для себе!</p>
+</header>
+
+<main>
+    <div class="filters">
+        <label for="credit-purpose">Ціль кредиту:</label>
+        <select id="credit-purpose">
+            <option value="auto">Автокредит</option>
+            <option value="home">Іпотека</option>
+            <option value="education">Освіта</option>
+            <option value="business">Бізнес</option>
+        </select>
+
+        <label for="early-repayment">Можливість дострокового погашення:</label>
+        <input type="checkbox" id="early-repayment">
+
+        <label for="credit-limit">Збільшення кредитної лінії:</label>
+        <input type="checkbox" id="credit-limit">
+
+        <button onclick="filterOffers()">Знайти Кредит</button>
+    </div>
+
+    <div class="offers">
+        <div class="offer" data-purpose="auto" data-early-repayment="yes" data-credit-limit="yes">
+            <h3>Банк A - Автокредит</h3>
+            <p>Процентна ставка: 5%</p>
+            <p>Максимальна сума: 500 000 грн</p>
+            <p>Можливість дострокового погашення: Так</p>
+            <p>Збільшення кредитної лінії: Так</p>
+        </div>
+
+        <div class="offer" data-purpose="home" data-early-repayment="no" data-credit-limit="yes">
+            <h3>Банк B - Іпотека</h3>
+            <p>Процентна ставка: 7%</p>
+            <p>Максимальна сума: 2 000 000 грн</p>
+            <p>Можливість дострокового погашення: Ні</p>
+            <p>Збільшення кредитної лінії: Так</p>
+        </div>
+
+        <div class="offer" data-purpose="education" data-early-repayment="yes" data-credit-limit="no">
+            <h3>Банк C - Кредит на Освіту</h3>
+            <p>Процентна ставка: 4%</p>
+            <p>Максимальна сума: 200 000 грн</p>
+            <p>Можливість дострокового погашення: Так</p>
+            <p>Збільшення кредитної лінії: Ні</p>
+        </div>
+
+        <!-- Додаткові кредитні пропозиції можна додати тут -->
+    </div>
+</main>
+
+<script>
+    async function filterOffers() {
+        const purpose = document.getElementById('credit-purpose').value;
+        const earlyRepayment = document.getElementById('early-repayment').checked;
+        const creditLimit = document.getElementById('credit-limit').checked;
+
+        const response = await fetch(`http://localhost:8080/api/credit-offers/filter?creditType=${purpose}&earlyRepayment=${earlyRepayment}&creditLimit=${creditLimit}`);
+        const offers = await response.json();
+
+        const offersContainer = document.querySelector('.offers');
+        offersContainer.innerHTML = '';
+
+        offers.forEach(offer => {
+            offersContainer.innerHTML += `
+                <div class="offer">
+                    <h3>${offer.bankName} - ${offer.creditType}</h3>
+                    <p>Процентна ставка: ${offer.interestRate}%</p>
+                    <p>Максимальна сума: ${offer.maxAmount} грн</p>
+                    <p>Можливість дострокового погашення: ${offer.earlyRepayment ? 'Так' : 'Ні'}</p>
+                    <p>Збільшення кредитної лінії: ${offer.creditLimit ? 'Так' : 'Ні'}</p>
+                </div>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>
