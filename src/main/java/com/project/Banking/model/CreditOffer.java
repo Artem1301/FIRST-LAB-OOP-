@@ -1,34 +1,43 @@
 package com.project.Banking.model;
 
-import lombok.Data;
-
-import javax.persistence.*;
-
-
-@Entity
-@Table(name = "credit_offers")
-@Data
 public class CreditOffer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "bank_name", nullable = false)
     private String bankName;
+    private double interestRate;
+    private double amount;
+    private int term; // in months
+    private boolean earlyRepayment;
+    private boolean increaseLimit;
 
-    @Column(name = "credit_type", nullable = false)
-    private String creditType;
+    public CreditOffer(String bankName, double interestRate, double amount, int term, boolean earlyRepayment, boolean increaseLimit) {
+        this.bankName = bankName;
+        this.interestRate = interestRate;
+        this.amount = amount;
+        this.term = term;
+        this.earlyRepayment = earlyRepayment;
+        this.increaseLimit = increaseLimit;
+    }
 
-    @Column(name = "interest_rate", nullable = false)
-    private Double interestRate;
+    public String getBankName() {
+        return bankName;
+    }
 
-    @Column(name = "max_amount", nullable = false)
-    private Long maxAmount;
+    public double getInterestRate() {
+        return interestRate;
+    }
 
-    @Column(name = "early_repayment", nullable = false)
-    private Boolean earlyRepayment;
+    public double getAmount() {
+        return amount;
+    }
 
-    @Column(name = "credit_limit", nullable = false)
-    private Boolean creditLimit;
+    public int getTerm() {
+        return term;
+    }
+
+    public boolean isEarlyRepayment() {
+        return earlyRepayment;
+    }
+
+    public boolean isIncreaseLimit() {
+        return increaseLimit;
+    }
 }
