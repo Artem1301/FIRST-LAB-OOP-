@@ -10,8 +10,33 @@
 <body>
 <div class="container">
     <h1>Пропозиції по кредитах</h1>
+
     <input type="text" id="bankName" placeholder="Введіть назву банку">
-    <button id="searchButton">Пошук</button>
+
+    <div class="filter-container">
+        <div class="filter-item">
+            <label for="earlyRepayment">Дострокове погашення:</label>
+            <select id="earlyRepayment">
+                <option value="">Будь-яке</option>
+                <option value="true">Так</option>
+                <option value="false">Ні</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <label for="increaseLimit">Збільшення кредитної лінії:</label>
+            <select id="increaseLimit">
+                <option value="">Будь-яке</option>
+                <option value="true">Так</option>
+                <option value="false">Ні</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <button id="searchButton">Пошук</button>
+    </div>
+
     <div id="offers"></div>
 </div>
 
@@ -19,7 +44,14 @@
     $(document).ready(function() {
         $("#searchButton").click(function() {
             const bankName = $("#bankName").val();
-            $.get("/search", { bankName: bankName }, function(data) {
+            const earlyRepayment = $("#earlyRepayment").val();
+            const increaseLimit = $("#increaseLimit").val();
+
+            $.get("/search", {
+                bankName: bankName,
+                earlyRepayment: earlyRepayment,
+                increaseLimit: increaseLimit
+            }, function(data) {
                 let offersHtml = '<h2>Пропозиції:</h2><ul>';
                 data.forEach(offer => {
                     offersHtml += `

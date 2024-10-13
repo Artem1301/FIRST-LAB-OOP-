@@ -27,6 +27,33 @@ input[type="text"] {
     border-radius: 4px;
 }
 
+.filter-container {
+    display: flex;
+    flex-direction: column; /* Встановлюємо вертикальне вирівнювання */
+    margin: 10px 0;
+}
+
+.filter-item {
+    margin-bottom: 15px; /* Відстань між блоками фільтрів */
+}
+
+label {
+    margin-right: 10px;
+}
+
+select {
+    width: 30%; /* Зменшена ширина до 40% */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 200px; /* Максимальна ширина */
+}
+
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
 button {
     padding: 10px;
     background: #5cb85c;

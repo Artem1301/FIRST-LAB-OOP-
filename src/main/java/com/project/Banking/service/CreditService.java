@@ -11,10 +11,10 @@ public class CreditService {
     private final List<CreditOffer> creditOffers = new ArrayList<>();
 
     public CreditService() {
-        creditOffers.add(new CreditOffer("Bank A", 5.0, 10000, 24, true, false));
-        creditOffers.add(new CreditOffer("Bank B", 4.5, 20000, 36, false, true));
-        creditOffers.add(new CreditOffer("Bank C", 6.0, 15000, 12, true, true));
-        // Додайте більше пропозицій за потреби
+        creditOffers.add(new CreditOffer("Bank 1", 5.0, 10000, 24, true, false));
+        creditOffers.add(new CreditOffer("Bank 2", 4.5, 20000, 36, false, true));
+        creditOffers.add(new CreditOffer("Bank 3", 6.0, 15000, 12, true, true));
+        creditOffers.add(new CreditOffer("Bank 4", 7.0, 13000, 6, false, false));
     }
 
     public List<CreditOffer> getCreditOffers() {
