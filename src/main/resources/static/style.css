@@ -29,12 +29,12 @@ input[type="text"] {
 
 .filter-container {
     display: flex;
-    flex-direction: column; /* Встановлюємо вертикальне вирівнювання */
+    flex-direction: column;
     margin: 10px 0;
 }
 
 .filter-item {
-    margin-bottom: 15px; /* Відстань між блоками фільтрів */
+    margin-bottom: 15px;
 }
 
 label {
@@ -42,11 +42,11 @@ label {
 }
 
 select {
-    width: 30%; /* Зменшена ширина до 40% */
+    width: 30%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-width: 200px; /* Максимальна ширина */
+    max-width: 200px;
 }
 
 .search-container {

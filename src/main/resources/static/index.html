@@ -38,6 +38,8 @@
     </div>
 
     <div id="offers"></div>
+
+    <div id="selectedOffer" style="margin-top: 20px;"></div>
 </div>
 
 <script>
@@ -52,9 +54,12 @@
                 earlyRepayment: earlyRepayment,
                 increaseLimit: increaseLimit
             }, function(data) {
-                let offersHtml = '<h2>Пропозиції:</h2><ul>';
-                data.forEach(offer => {
-                    offersHtml += `
+                if (data.length === 0) {
+                    $("#offers").html('<h2>Пропозиція не існує</h2>');
+                } else {
+                    let offersHtml = '<h2>Пропозиції:</h2><ul>';
+                    data.forEach(offer => {
+                        offersHtml += `
                             <li>
                                 <strong>Банк:</strong> ${offer.bankName}<br>
                                 <strong>Відсоткова ставка:</strong> ${offer.interestRate}%<br>
@@ -62,10 +67,20 @@
                                 <strong>Термін:</strong> ${offer.term} міс.<br>
                                 <strong>Дострокове погашення:</strong> ${offer.earlyRepayment ? 'Так' : 'Ні'}<br>
                                 <strong>Збільшення кредитної лінії:</strong> ${offer.increaseLimit ? 'Так' : 'Ні'}<br>
+                                <button class="selectOfferButton" data-id="${offer.id}">Вибрати</button>
                             </li>`;
-                });
-                offersHtml += '</ul>';
-                $("#offers").html(offersHtml);
+                    });
+                    offersHtml += '</ul>';
+                    $("#offers").html(offersHtml);
+
+                    $(".selectOfferButton").click(function() {
+                        const offerId = $(this).data("id");
+
+                        $.post("/selectOffer", { offerId: offerId }, function(response) {
+                            $("#selectedOffer").html(`<h3>${response}</h3>`);
+                        });
+                    });
+                }
             });
         });
     });

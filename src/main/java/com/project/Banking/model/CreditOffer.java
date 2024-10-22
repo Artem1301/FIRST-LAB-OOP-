@@ -1,6 +1,7 @@
 package com.project.Banking.model;
 
 public class CreditOffer {
+    private int id;
     private String bankName;
     private double interestRate;
     private double amount;
@@ -8,7 +9,8 @@ public class CreditOffer {
     private boolean earlyRepayment;
     private boolean increaseLimit;
 
-    public CreditOffer(String bankName, double interestRate, double amount, int term, boolean earlyRepayment, boolean increaseLimit) {
+    public CreditOffer(int id, String bankName, double interestRate, double amount, int term, boolean earlyRepayment, boolean increaseLimit) {
+        this.id = id;
         this.bankName = bankName;
         this.interestRate = interestRate;
         this.amount = amount;
@@ -16,6 +18,8 @@ public class CreditOffer {
         this.earlyRepayment = earlyRepayment;
         this.increaseLimit = increaseLimit;
     }
+
+    public int getId() { return id; }
 
     public String getBankName() {
         return bankName;
